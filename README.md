@@ -95,4 +95,16 @@ click on >>>  Local:   http://localhost:5173/
 5. to upload jobs click on >>> upload job
 
 
+sign in to GetJob Portal
+![figure 1](<sign in search.JPG>)
 
+![figure 2](<recruiter posts jobs.JPG>)
+
+find different companies
+![figure 3](<find companies.JPG>)
+
+filter your search to your specific needs
+![figure 4](<filter search.JPG>)
+
+more about GetJob
+![figure 5](<about on GetJob.JPG>)
