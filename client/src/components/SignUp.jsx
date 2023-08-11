@@ -5,13 +5,17 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
+import Loading from "./Loading"
+import { apiRequest } from "../utils";
+import  { Login } from "../redux/userSlice";
 
 const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [isRegister, setIsRegister] = useState(true);
+  const [isRegister, setIsRegister] = useState(false);
   const [accountType, setAccountType] = useState("seeker");
+const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [errMsg, setErrMsg] = useState("");
   const {
@@ -27,11 +31,56 @@ const SignUp = ({ open, setOpen }) => {
 
   const closeModal = () => setOpen(false);
 
-  const onSubmit = () => {};
+
+
+  const onSubmit = async(data) => {
+    let URL = null
+
+    if (isRegister) {
+      if (accountType === "seeker") {
+        URL = "auth/register";
+      } else URL = "companies/register";
+    } else {
+      if (accountType === "seeker") {
+        URL = "auth/login";
+      } else {
+         URL = "companies/login";
+    }
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      const res = await apiRequest({
+        url: URL,
+        data: data,
+        method: "POST",
+      });
+        // console.log(res)
+
+       if (res?.status === "failed") {
+        setErrMsg(res?.message);
+       } else {
+        setErrMsg("");
+        const newData = { token: res?.token, ...res?.user 
+        };
+        dispatch(Login(newData));
+
+        localStorage.setItem("userInfo", JSON.
+        stringify(newData));
+
+        window.location.replace(from);
+       }
+       setIsSubmitting(false)
+    } catch (error) {
+      setIsSubmitting(false)
+      console.log(error)
+    }
+};
 
   return (
     <>
-      <Transition appear show={open || false}>
+      <Transition appear show={true || false}>
         <Dialog as='div' className='relative z-10 ' onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -216,11 +265,11 @@ const SignUp = ({ open, setOpen }) => {
                     )}
 
                     <div className='mt-2'>
-                      <CustomButton
+                    {isSubmitting? <Loading/> :  <CustomButton
                         type='submit'
                         containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
                         title={isRegister ? "Create Account" : "Login Account"}
-                      />
+                      />}
                     </div>
                   </form>
 
