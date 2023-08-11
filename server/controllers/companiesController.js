@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Companies from "../models/companiesModel.js";
-import { response } from "express";
 
 export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
