@@ -83,6 +83,7 @@ In conclusion, the choice of the MERN stack, along with Vercel and Create React 
 3. npm install on both (seperately)
 4. npm start to run (server)
 5. npm run dev to (client)
+6. npm run test(to test)
 
 click on >>>  Local:   http://localhost:5173/
 
@@ -93,6 +94,10 @@ click on >>>  Local:   http://localhost:5173/
 4. to search for specific companies, click on companies
 ## Recruiter
 5. to upload jobs click on >>> upload job
+
+6. Login details: testaccount@gmail.com
+   Password: 123456
+   NB: Can create an account with own email to login
 
 
 sign in to GetJob Portal
