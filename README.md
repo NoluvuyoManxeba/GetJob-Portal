@@ -92,14 +92,13 @@ click on >>>  Local:   http://localhost:5173/
 2. click on find job & search on search bar
 3. filter search to desired requirements
 4. to search for specific companies, click on companies
-## Recruiter
-5. to upload jobs click on >>> upload job
-
-6. Login details: testaccount@gmail.com
+5. Login details: testaccount@gmail.com
    Password: 123456
    NB: Can create an account with own email to login
 
-
+## Recruiter
+ to upload jobs click on >>> upload job
+ 
 sign in to GetJob Portal
 ![figure 1](<sign in search.JPG>)
 
