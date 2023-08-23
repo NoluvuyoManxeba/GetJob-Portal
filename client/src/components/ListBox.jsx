@@ -2,8 +2,10 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2, BsChevronExpand } from "react-icons/bs";
 
+// Available sort options
 const options = ["Newest", "Oldest", "A-Z", "Z-A"];
 
+// Component for displaying a listbox with sort options, Listbox component for selecting sort options, Button displaying the selected sort option,Transition for displaying options,List of sort options,Display check mark for selected option
 const ListBox = ({ sort, setSort }) => {
   return (
     <div className='w-[8rem] md:w-[10rem]'>

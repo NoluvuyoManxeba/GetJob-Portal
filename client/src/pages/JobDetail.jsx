@@ -7,14 +7,15 @@ import { jobs } from "../utils/data";
 import { CustomButton, JobCard } from "../components";
 
 const JobDetail = () => {
-  const params = useParams();
+  const params = useParams(); // Extract the id parameter from the URL
   const id = parseInt(params.id) - 1;
-  const [job, setJob] = useState(jobs[0]);
+  const [job, setJob] = useState(jobs[0]); // Initialize state variables for job details and selected tab
   const [selected, setSelected] = useState("0");
 
+// Fetch job details based on the selected id using useEffect
   useEffect(() => {
-    setJob(jobs[id ?? 0]);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    setJob(jobs[id ?? 0]); // If id is not found, default to the first job
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); // Scroll to top on component mount
   }, [id]);
 
   return (
@@ -121,6 +122,7 @@ const JobDetail = () => {
                 )}
               </>
             ) : (
+              // Company Details
               <>
                 <div className='mb-6 flex flex-col'>
                   <p className='text-xl text-blue-600 font-semibold'>

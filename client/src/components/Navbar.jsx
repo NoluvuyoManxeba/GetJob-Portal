@@ -10,6 +10,7 @@ import { users } from "../utils/data";
 import { useSelector, useDispatch } from "react-redux";
 import {Logout} from "../redux/userSlice"
 
+// Component for rendering the user menu items, Button displaying user profile information, Transition for displaying menu options, User profile or company profile link, Logout button
 function MenuList({ user, onClick }) {
   const dispatch = useDispatch()
   const handleLogout = () => {
@@ -101,6 +102,7 @@ window.location.reload("/")
     </div>
   );
 }
+// Component for rendering the Navbar, Navigation bar, Navigation links, Conditional rendering based on user authentication, 
 const Navbar = () => {
   const {user} = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);

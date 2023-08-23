@@ -1,6 +1,6 @@
 import React from "react";
 import { JobImg } from "../assets";
-
+//The about page, section 1, paragraph 1, section 2, paragraph 2
 const About = () => {
   return (
     <div className='container mx-auto flex flex-col gap-8 2xl:gap-14 py-6 '>

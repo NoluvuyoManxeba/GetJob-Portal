@@ -7,9 +7,10 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { CustomButton, TextInput } from "../components";
 
+// UserForm component for editing user profile
 const UserForm = ({ open, setOpen }) => {
-  const { user } = useSelector((state) => state.user);
-  const {
+  const { user } = useSelector((state) => state.user); // Get user data from Redux store
+  const { // Initialize form validation using react-hook-form
     register,
     handleSubmit,
     getValues,
@@ -20,13 +21,14 @@ const UserForm = ({ open, setOpen }) => {
     defaultValues: { ...user?.user },
   });
   const dispatch = useDispatch();
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(""); // State for profile image and uploaded CV
   const [uploadCv, setUploadCv] = useState("");
-
+// Function to handle form submission
   const onSubmit = async (data) => {};
-
+// Function to close the modal
   const closeModal = () => setOpen(false);
 
+  // Modal using Transition and Dialog from Headless UI
   return (
     <>
       <Transition appear show={open ?? false} as={Fragment}>
@@ -199,10 +201,10 @@ const UserForm = ({ open, setOpen }) => {
     </>
   );
 };
-
+// UserProfile component displaying user's profile information
 const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // State for controlling modal open/close
   const userInfo = user;
 
   return (

@@ -5,6 +5,7 @@ import CustomButton from "./CustomButton";
 import { popularSearch } from "../utils/data";
 import { HeroImage } from "../assets";
 
+// Component for the search input field
 const SearchInput = ({ placeholder, icon, value, setValue, styles }) => {
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -32,6 +33,7 @@ const SearchInput = ({ placeholder, icon, value, setValue, styles }) => {
   );
 };
 
+// Main header component
 const Header = ({
   title,
   type,

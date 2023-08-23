@@ -1,9 +1,12 @@
-import { GoLocation } from "react-icons/go";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import { GoLocation } from "react-icons/go"; // Importing the GoLocation icon from react-icons/go
+import moment from "moment"; // Importing the moment library for date formatting
+import { Link } from "react-router-dom"; // Importing the Link component from react-router-dom
 
+
+// Component for displaying a job card
 const JobCard = ({ job }) => {
   return (
+    // Link to the job detail page
     <Link to={`/job-detail/${job?.id}`}>
       <div
         className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 

@@ -4,19 +4,24 @@ import { CompanyCard, CustomButton, Header, ListBox } from "../components";
 import { companies } from "../utils/data";
 
 const Companies = () => {
+  // State variables to manage page and data
   const [page, setPage] = useState(1);
   const [numPage, setNumPage] = useState(1);
   const [recordsCount, setRecordsCount] = useState(0);
   const [data, setData] = useState(companies ?? []);
+  // State variables for search and sorting
   const [searchQuery, setSearchQuery] = useState("");
   const [cmpLocation, setCmpLocation] = useState("");
   const [sort, setSort] = useState("Newest");
+  // State variable to manage fetching/loading
   const [isFetching, setIsFetching] = useState(false);
-
+  // Get the current location and navigate function from React Router
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Function to handle search form submission
   const handleSearchSubmit = () => {};
+  // Function to handle "Load More" button click
   const handleShowMore = () => {};
 
   return (

@@ -1,3 +1,4 @@
+// Importing and exporting various components
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CustomButton from "./CustomButton";
@@ -10,6 +11,7 @@ import Loading from "./Loading";
 import CompanyCard from "./CompanyCard";
 import JobTypes from "./JobTypes";
 
+// Exporting all the components
 export {
   Navbar,
   Footer,

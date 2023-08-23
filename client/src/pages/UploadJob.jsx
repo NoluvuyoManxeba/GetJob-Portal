@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CustomButton, JobCard, JobTypes, TextInput } from "../components";
 import { jobs } from "../utils/data";
-
+// Initialize form validation using react-hook-form
 const UploadJob = () => {
   const {
     register,
@@ -14,10 +14,10 @@ const UploadJob = () => {
     mode: "onChange",
     defaultValues: {},
   });
-
+ // State for error messages and selected job title
   const [errMsg, setErrMsg] = useState("");
   const [jobTitle, setJobTitle] = useState("Full-Time");
-
+  // Function to handle form submission
   const onSubmit = async (data) => {};
 
   return (

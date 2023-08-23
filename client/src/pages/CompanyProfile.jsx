@@ -9,7 +9,9 @@ import { Link, useParams } from "react-router-dom";
 import { companies, jobs } from "../utils/data";
 import { CustomButton, JobCard, Loading, TextInput } from "../components";
 
+// Component for editing company profile
 const CompnayForm = ({ open, setOpen }) => {
+  // State and form handling
   const { user } = useSelector((state) => state.user);
   const {
     register,
@@ -25,7 +27,7 @@ const CompnayForm = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const [profileImage, setProfileImage] = useState("");
   const [uploadCv, setUploadCv] = useState("");
-
+// Handle form submission
   const onSubmit = () => {};
 
   const closeModal = () => setOpen(false);
@@ -155,8 +157,9 @@ const CompnayForm = ({ open, setOpen }) => {
     </>
   );
 };
-
+// Component for displaying company profile
 const CompanyProfile = () => {
+  // State and data handling
   const params = useParams();
   const { user } = useSelector((state) => state.user);
   const [info, setInfo] = useState(null);

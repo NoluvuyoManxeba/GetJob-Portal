@@ -9,6 +9,7 @@ import { experience, jobTypes, jobs } from "../utils/data";
 import { CustomButton, JobCard, ListBox } from "../components";
 
 const FindJobs = () => {
+// State for sorting, pagination, and filtering
   const [sort, setSort] = useState("Newest");
   const [page, setPage] = useState(1);
   const [numPage, setNumPage] = useState(1);
@@ -24,7 +25,7 @@ const FindJobs = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-
+// Function to toggle selected job types
   const filterJobs = (val) => {
     if (filterJobTypes?.includes(val)) {
       setFilterJobTypes(filterJobTypes.filter((el) => el != val));
@@ -32,7 +33,7 @@ const FindJobs = () => {
       setFilterJobTypes([...filterJobTypes, val]);
     }
   };
-
+// Function to filter by experience
   const filterExperience = async (e) => {
     setFilterExp(e);
   };

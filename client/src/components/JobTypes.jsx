@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2, BsChevronExpand } from "react-icons/bs";
 
+// List of job types, Listbox component for selecting job types, Button displaying the selected job type, Transition for displaying options,List of job type options,Display job type,Display check mark for selected option
 const types = ["Full-Time", "Part-Time", "Contract", "Intern"];
 
 export default function JobTypes({ jobTitle, setJobTitle }) {

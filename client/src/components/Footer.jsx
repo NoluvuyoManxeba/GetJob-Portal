@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
 
+//Stylish background wave , Newsletter subscription section, Social media icons,Copyright and attribution,Designer attribution
 const Footer = () => {
   return (
     <footer className='text-white mp-20'>

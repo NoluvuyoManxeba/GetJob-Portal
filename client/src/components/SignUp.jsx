@@ -10,6 +10,7 @@ import { apiRequest } from "../utils";
 import  { Login } from "../redux/userSlice";
 
 const SignUp = ({ open, setOpen }) => {
+// Initialize the state and variables
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -18,6 +19,7 @@ const SignUp = ({ open, setOpen }) => {
 const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [errMsg, setErrMsg] = useState("");
+// Initialize react-hook-form for form management
   const {
     register,
     handleSubmit,
@@ -28,11 +30,11 @@ const [isSubmitting, setIsSubmitting] = useState(false)
     mode: "onChange",
   });
   let from = location.state?.from?.pathname || "/";
-
+// Close the modal
   const closeModal = () => setOpen(false);
 
 
-
+// Handle form submission
   const onSubmit = async(data) => {
     let URL = null
 
@@ -77,7 +79,7 @@ const [isSubmitting, setIsSubmitting] = useState(false)
       console.log(error)
     }
 };
-
+// JSX return
   return (
     <>
       <Transition appear show={true || false}>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// This component represents a card displaying company information.
+// It receives a 'cmp' prop, which should contain company data.
 const CompanyCard = ({ cmp }) => {
   return (
     <div className='w-full h-16 flex gap-4 items-center justify-between bg-white shadow-md rounded'>
