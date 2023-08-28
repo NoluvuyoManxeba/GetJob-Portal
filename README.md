@@ -82,7 +82,7 @@ In conclusion, the choice of the MERN stack, along with Vercel and Create React 
 2. cd to client & server directory on two seperate command prompts
 3. npm install on both (seperately)
 4. npm start to run (server)
-5. npm run dev to (client)
+5. npm start to run (client)
 6. npm run test(to test)
 
 click on >>>  Local:   http://localhost:5173/
