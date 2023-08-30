@@ -33,7 +33,10 @@ export const register = async (req, res, next) => {
       password,
     });
 
-    // user token
+    //send email verification to use
+    const type = "companies";
+
+    // // user token
     const token = company.createJWT();
 
     res.status(201).json({
@@ -204,7 +207,7 @@ export const getCompanies = async (req, res, next) => {
     // queryResult = queryResult.skip(skip).limit(limit);
 
     // show mopre instead of moving to next page
-    queryResult = queryResult.limit(limit * page);
+    queryResult = await queryResult.limit(limit * page);
 
     const companies = await queryResult;
 
@@ -285,7 +288,8 @@ export const getCompanyById = async (req, res, next) => {
     }
 
     company.password = undefined;
-    response.status(200).json({
+
+    res.status(200).json({
       success: true,
       data: company,
     });

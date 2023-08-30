@@ -7,15 +7,19 @@ export const register = async (req, res, next) => {
 
   if (!firstName) {
     next("First Name is required");
+    return;
   }
   if (!email) {
     next("Email is required");
+    return;
   }
   if (!lastName) {
     next("Last Name is required");
+    return;
   }
   if (!password) {
     next("Password is required");
+    return;
   }
 
   try {

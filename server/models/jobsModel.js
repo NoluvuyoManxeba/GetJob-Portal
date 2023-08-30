@@ -9,7 +9,7 @@ const jobSchema = new mongoose.Schema(
     location: { type: String, required: [true, "Location is required"] },
     salary: { type: Number, required: [true, "Salary is required"] },
     vacancies: { type: Number },
-    experiences: { type: Number, default: 0 }, // Default experience is set to 0
+    experience: { type: Number, default: 0 }, // Default experience is set to 0
     detail: [
       {
         desc: { type: String }, // Description of the job
