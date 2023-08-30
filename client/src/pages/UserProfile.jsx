@@ -5,27 +5,56 @@ import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
-import { CustomButton, TextInput } from "../components";
+import { CustomButton, Loading, TextInput } from "../components";
+import { apiRequest, handleFileUpload } from "../utils";
+import { Login } from "../redux/userSlice";
+import { NoProfile } from "../assets";
 
 // UserForm component for editing user profile
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user); // Get user data from Redux store
-  const { // Initialize form validation using react-hook-form
+  const {
+    // Initialize form validation using react-hook-form
     register,
     handleSubmit,
-    getValues,
-    watch,
     formState: { errors },
   } = useForm({
     mode: "onChange",
-    defaultValues: { ...user?.user },
+    defaultValues: { ...user },
   });
   const dispatch = useDispatch();
   const [profileImage, setProfileImage] = useState(""); // State for profile image and uploaded CV
-  const [uploadCv, setUploadCv] = useState("");
-// Function to handle form submission
-  const onSubmit = async (data) => {};
-// Function to close the modal
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Function to handle form submission
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    try {
+      const uri = profileImage && (await handleFileUpload(profileImage));
+
+      const newData = uri ? { ...data, profileUrl: uri } : data;
+
+      const res = await apiRequest({
+        url: "/users/update-user",
+        token: user?.token,
+        data: newData,
+        method: "PUT",
+      });
+
+      if (res?.sucess) {
+        const newData = { token: res?.token, ...res?.user };
+        dispatch(Login(newData));
+        // localStorage.setItem("userInfo", JSON.stringify(newData));
+        setOpen(false);
+        window.location.reload();
+      }
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false);
+      console.log(error);
+    }
+  };
+  // Function to close the modal
   const closeModal = () => setOpen(false);
 
   // Modal using Transition and Dialog from Headless UI
@@ -148,7 +177,7 @@ const UserForm = ({ open, setOpen }) => {
                           onChange={(e) => setProfileImage(e.target.files[0])}
                         />
                       </div>
-
+                      {/* 
                       <div className='w-1/2'>
                         <label className='text-gray-600 text-sm mb-1'>
                           Resume
@@ -157,7 +186,7 @@ const UserForm = ({ open, setOpen }) => {
                           type='file'
                           onChange={(e) => setUploadCv(e.target.files[0])}
                         />
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className='flex flex-col'>
@@ -185,11 +214,15 @@ const UserForm = ({ open, setOpen }) => {
                     </div>
 
                     <div className='mt-4'>
-                      <CustomButton
-                        type='submit'
-                        containerStyles='inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none '
-                        title={"Submit"}
-                      />
+                      {isSubmitting ? (
+                        <Loading />
+                      ) : (
+                        <CustomButton
+                          type='submit'
+                          containerStyles='inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none '
+                          title={"Submit"}
+                        />
+                      )}
                     </div>
                   </form>
                 </Dialog.Panel>
@@ -206,7 +239,8 @@ const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false); // State for controlling modal open/close
   const userInfo = user;
-
+  // console.log(userInfo);
+  // console.log(user);
   return (
     <div className='container mx-auto flex items-center justify-center py-10'>
       <div className='w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 pb-20 rounded-lg'>
@@ -245,7 +279,7 @@ const UserProfile = () => {
 
             <div className='w-full md:w-1/3 h-44'>
               <img
-                src={userInfo?.profileUrl}
+                src={userInfo?.profileUrl || NoProfile}
                 alt={userInfo?.firstName}
                 className='w-full h-48 object-contain rounded-lg'
               />

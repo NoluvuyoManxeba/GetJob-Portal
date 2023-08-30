@@ -5,38 +5,37 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
-import Loading from "./Loading"
+import Loading from "./Loading";
 import { apiRequest } from "../utils";
-import  { Login } from "../redux/userSlice";
+import { Login } from "../redux/userSlice";
 
 const SignUp = ({ open, setOpen }) => {
-// Initialize the state and variables
+  // Initialize the state and variables
   const dispatch = useDispatch();
   const location = useLocation();
 
   const [isRegister, setIsRegister] = useState(false);
   const [accountType, setAccountType] = useState("seeker");
-const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-// Initialize react-hook-form for form management
+  // Initialize react-hook-form for form management
   const {
     register,
     handleSubmit,
     getValues,
-    watch,
     formState: { errors },
   } = useForm({
     mode: "onChange",
   });
+
   let from = location.state?.from?.pathname || "/";
-// Close the modal
+  // Close the modal
   const closeModal = () => setOpen(false);
 
-
-// Handle form submission
-  const onSubmit = async(data) => {
-    let URL = null
+  // Handle form submission
+  const onSubmit = async (data) => {
+    let URL = null;
 
     if (isRegister) {
       if (accountType === "seeker") {
@@ -46,11 +45,11 @@ const [isSubmitting, setIsSubmitting] = useState(false)
       if (accountType === "seeker") {
         URL = "auth/login";
       } else {
-         URL = "companies/login";
-    }
+        URL = "companies/login";
+      }
     }
 
-    setIsSubmitting(true)
+    setIsLoading(true);
 
     try {
       const res = await apiRequest({
@@ -58,31 +57,34 @@ const [isSubmitting, setIsSubmitting] = useState(false)
         data: data,
         method: "POST",
       });
-        // console.log(res)
 
-       if (res?.status === "failed") {
+      console.log(res);
+
+      if (!res?.success === true) {
         setErrMsg(res?.message);
-       } else {
-        setErrMsg("");
-        const newData = { token: res?.token, ...res?.user 
-        };
-        dispatch(Login(newData));
+        setIsLoading(false);
+        return;
+      } else {
+        setErrMsg(res?.message);
+        const newData = { token: res?.token, ...res?.user };
 
-        localStorage.setItem("userInfo", JSON.
-        stringify(newData));
+        dispatch(Login(newData));
+        localStorage.setItem("userInfo", JSON.stringify(newData));
 
         window.location.replace(from);
-       }
-       setIsSubmitting(false)
+      }
+
+      setIsLoading(false);
     } catch (error) {
-      setIsSubmitting(false)
-      console.log(error)
+      setIsLoading(false);
+      console.log(error);
     }
-};
-// JSX return
+  };
+
+  // JSX return
   return (
     <>
-      <Transition appear show={true || false}>
+      <Transition appear show={open || false}>
         <Dialog as='div' className='relative z-10 ' onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -267,11 +269,17 @@ const [isSubmitting, setIsSubmitting] = useState(false)
                     )}
 
                     <div className='mt-2'>
-                    {isSubmitting? <Loading/> :  <CustomButton
-                        type='submit'
-                        containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
-                        title={isRegister ? "Create Account" : "Login Account"}
-                      />}
+                      {isLoading ? (
+                        <Loading />
+                      ) : (
+                        <CustomButton
+                          type='submit'
+                          containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
+                          title={
+                            isRegister ? "Create Account" : "Login Account"
+                          }
+                        />
+                      )}
                     </div>
                   </form>
 

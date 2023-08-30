@@ -2,25 +2,30 @@ import { GoLocation } from "react-icons/go"; // Importing the GoLocation icon fr
 import moment from "moment"; // Importing the moment library for date formatting
 import { Link } from "react-router-dom"; // Importing the Link component from react-router-dom
 
+const noLogo =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png";
 
 // Component for displaying a job card
 const JobCard = ({ job }) => {
   return (
     // Link to the job detail page
-    <Link to={`/job-detail/${job?.id}`}>
-      <div
-        className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 
+    <Link
+      to={`/job-detail/${job?._id}`}
+      className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 
                 rounded-md px-3 py-5 '
-      >
+    >
+      <div className='w-full h-full flex flex-col justify-between'>
         <div className='flex gap-3'>
           <img
-            src={job?.company?.profileUrl}
-            alt={job?.company?.name}
-            className='w-14 h-14'
+            src={job?.logo || noLogo}
+            alt={job?.name}
+            className='w-14 h-14 rounded'
           />
 
-          <div className=''>
-            <p className='text-lg font-semibold truncate'>{job?.jobTitle}</p>
+          <div className='w-full h-16 flex flex-col justify-center'>
+            <p className='w-full h-12 flex iteme-center text-lg font-semibold overflow-hidden leading-5'>
+              {job?.jobTitle}
+            </p>
             <span className='flex gap-2 items-center'>
               <GoLocation className='text-slate-900 text-sm' />
               {job?.location}

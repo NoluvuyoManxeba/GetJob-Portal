@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import { users } from "../utils/data";
 import { useSelector, useDispatch } from "react-redux";
-import {Logout} from "../redux/userSlice"
+import { Logout } from "../redux/userSlice";
 
 // Component for rendering the user menu items, Button displaying user profile information, Transition for displaying menu options, User profile or company profile link, Logout button
 function MenuList({ user, onClick }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleLogout = () => {
-dispatch(Logout())
-window.location.reload("/")
+    dispatch(Logout());
+    window.location.reload("/");
   };
 
   return (
@@ -102,9 +102,9 @@ window.location.reload("/")
     </div>
   );
 }
-// Component for rendering the Navbar, Navigation bar, Navigation links, Conditional rendering based on user authentication, 
+// Component for rendering the Navbar, Navigation bar, Navigation links, Conditional rendering based on user authentication,
 const Navbar = () => {
-  const {user} = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseNavbar = () => {
@@ -134,9 +134,9 @@ const Navbar = () => {
             <li>
               <Link to='/about-us'>About</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to='/admin'>Admin</Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className='hidden lg:block'>

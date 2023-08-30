@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 
 // This component represents a card displaying company information.
 // It receives a 'cmp' prop, which should contain company data.
+const noLogo =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png";
+
 const CompanyCard = ({ cmp }) => {
   return (
     <div className='w-full h-16 flex gap-4 items-center justify-between bg-white shadow-md rounded'>
       <div className='w-3/4 md:w-2/4 flex gap-4 items-center'>
         <Link to={`/company-profile/${cmp?._id}`}>
           <img
-            src={cmp?.profileUrl}
+            src={cmp?.profileUrl || noLogo}
             alt={cmp?.name}
             className='w-8 md:w-12 h-8 md:h-12 rounded'
           />

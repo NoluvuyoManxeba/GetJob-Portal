@@ -1,3 +1,4 @@
+import React from "react";
 // Import required components and hooks from react-router-dom and other files
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
@@ -17,7 +18,7 @@ import { useSelector } from "react-redux";
 function Layout() {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
-// If the user has a token (authenticated), allow access to child routes
+  // If the user has a token (authenticated), allow access to child routes
   // Otherwise, navigate to the user authentication page with the current location state
   return user?.token ? (
     <Outlet />
@@ -28,7 +29,7 @@ function Layout() {
 // Main App component
 function App() {
   // Access user information from Redux store
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state?.user);
   return (
     <main className='bg-[#f7fdfd]'>
       <Navbar />
@@ -41,12 +42,8 @@ function App() {
           />
           <Route path='/find-jobs' element={<FindJobs />} />
           <Route path='/companies' element={<Companies />} />
-          <Route
-            path= "/user-profile/:id?"
-            element={<UserProfile />}
-          />
+          <Route path='/user-profile/:id?' element={<UserProfile />} />
 
-          {/* <Route path={"/company-profile"} element={<CompanyProfile />} /> */}
           <Route path={"/company-profile/:id?"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
